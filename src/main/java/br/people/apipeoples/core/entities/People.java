@@ -1,4 +1,4 @@
 package br.people.apipeoples.core.entities;
 
-public record People(Long id, String name, String email) {
+public record People(Long id, String name, String email, String password) {
 }

@@ -4,6 +4,7 @@ import br.people.apipeoples.core.entities.People;
 import br.people.apipeoples.core.gateways.PeopleGateway;
 import br.people.apipeoples.infraestructure.mappers.PeopleEntityMapper;
 import br.people.apipeoples.infraestructure.persistence.PeopleEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import br.people.apipeoples.infraestructure.persistence.PeopleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,9 @@ public class PeopleRepositoryGateway implements PeopleGateway {
 
     @Override
     public People create(People people) {
-        PeopleEntity newPeopleEntity = peopleRepository.save(peopleEntityMapper.toEntity(people));
+        String hashPassword = new BCryptPasswordEncoder().encode(people.password());
+        People peopleCreate = new People(people.id(), people.name(), people.email(), hashPassword);
+        PeopleEntity newPeopleEntity = peopleRepository.save(peopleEntityMapper.toEntity(peopleCreate));
         return peopleEntityMapper.toCore(newPeopleEntity);
     }
 

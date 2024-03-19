@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class PeopleEntityMapper {
 
     public PeopleEntity toEntity(People people) {
-        return new PeopleEntity(people.id(), people.name(), people.email());
+        return new PeopleEntity(people.id(), people.name(), people.email(), people.password());
     }
 
     public People toCore(PeopleEntity peopleEntity) {
-        return new People(peopleEntity.getId(), peopleEntity.getName(), peopleEntity.getEmail());
+        return new People(peopleEntity.getId(), peopleEntity.getName(), peopleEntity.getEmail(), peopleEntity.getPassword());
     }
 }

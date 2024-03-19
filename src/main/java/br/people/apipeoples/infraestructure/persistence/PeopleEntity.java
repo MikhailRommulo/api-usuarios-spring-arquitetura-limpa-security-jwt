@@ -14,9 +14,12 @@ public class PeopleEntity {
     @GeneratedValue
     private Long id;
 
-    @Column(length = 80)
+    @Column(length = 80, nullable = false)
     private String name;
 
-    @Column(length = 80)
+    @Column(unique = true, length = 80)
     private String email;
+
+    @Column(nullable = true)
+    private String password;
 }
